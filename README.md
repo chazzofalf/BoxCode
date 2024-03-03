@@ -1,14 +1,15 @@
 
 ![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
-
+<p align="center">
 <img 
     style="display: block; 
            margin-left: auto;
            margin-right: auto;
-           width: 100%;"
+           width: 33%;"    
     src="title.png" 
     alt="Our logo">
 </img>
+</p>
 
 ![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
 
