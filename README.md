@@ -29,17 +29,21 @@ What things you need to install the software and how to install them.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
+Create folder where you would like to install this app and then run
 
-Say what the step will be
+These instructions are assuming you have your command line prompt current working directory in the root project folder.
+Windows
 
-
-
-And repeat
+Alternatively, if you have dotnet sdk 8.0 installed (You should check prereqs).
 
 ```
-until finished
+dotnet publish -r YOURPLATFORM 
+mkdir ~/dist
+cp -r bin/Release/net8.0/win-x64/publish ~/dist
+mkdir ~/.local/bin
+ln -s ~/dist/BoxCode ~/bin/BoxCode
 ```
+YOURPLATFORM Could be: win-x64, linux-x64, osx,x64, osx-arm64 ...
 
 End with an example of getting some data out of the system or using it for a little demo.
 
