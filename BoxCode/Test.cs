@@ -7,7 +7,7 @@ public class Test
     public static void Execute()
     {
         var msg =
-            "Meet Zethana at 35 degrees north 30 degrees west.\n\tPeople fail dogs are better.";
+            "BoxCode - A wild take on the pig pen cipher.";
         
         var msgThoth = msg.ThothString();
         var msga = msgThoth.UnthothString();
