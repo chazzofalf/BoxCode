@@ -1,5 +1,7 @@
 # Box Code
 
+![BoxCode - A wild take on the pig pen cipher.](title.png)
+
 ## Table of Contents
 
 - [About](#about)
