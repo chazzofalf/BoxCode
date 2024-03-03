@@ -1,8 +1,8 @@
 ﻿using SkiaSharp;
 
-namespace BoxCode;
+namespace BoxCodeLib;
 
-public class PenCode
+internal class PenCode
 {
     public string Letter {get;  }
     public string[] PenRows {get;  }

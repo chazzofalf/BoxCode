@@ -4,9 +4,9 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using SkiaSharp;
 
-namespace BoxCode;
+namespace BoxCodeLib;
 
-public static class TovaExtensions
+internal static class TovaExtensions
 {
     public static SKBitmap TovaBitmap(this string str, bool singleLine=false,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null) =>     
     str.GetAntithesis()

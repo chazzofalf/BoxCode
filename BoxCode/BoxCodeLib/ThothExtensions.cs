@@ -9,9 +9,9 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.Intrinsics.X86;
 using System.Security.Cryptography;
 
-namespace BoxCode;
+namespace BoxCodeLib;
 
-public static class ThothExtensions
+internal static class ThothExtensions
 {
     private static IEnumerable<char> Vowels => "aeiouy";
 

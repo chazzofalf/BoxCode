@@ -1,10 +1,10 @@
-﻿namespace BoxCode;
+﻿namespace BoxCodeLib;
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Security.Cryptography.X509Certificates;
 using SkiaSharp;
-public static class ThothGraphicsExtensions
+internal static class ThothGraphicsExtensions
 {
     public static string FromBitmap(this SKBitmap bmp)
     {

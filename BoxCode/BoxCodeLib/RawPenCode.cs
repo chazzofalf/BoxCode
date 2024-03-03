@@ -1,4 +1,4 @@
-﻿namespace BoxCode;
+﻿namespace BoxCodeLib;
 using Newtonsoft.Json.Serialization;
 
 internal class RawPenCode

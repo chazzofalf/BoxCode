@@ -2,9 +2,9 @@
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
-namespace BoxCode;
+namespace BoxCodeLib;
 
-public static class Pencodes
+internal static class Pencodes
 {
     private static PenCode[]? _pencodes = null;
     private static PenCode[]? _sideSpacedPenCodes = null;

@@ -1,8 +1,8 @@
 ﻿using SkiaSharp;
 
-namespace BoxCode;
+namespace BoxCodeLib;
 
-public class Test
+internal class Test
 {
     public static void Execute()
     {
