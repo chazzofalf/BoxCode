@@ -72,9 +72,9 @@ public static class ThothGraphicsExtensions
             
         }
     }
-    public static SKBitmap CreateBitmap(this string text)
+    public static SKBitmap CreateBitmap(this string text,bool singleLine=false)
     {
-        var etext = text.ThothString();
+        var etext = text.ThothString(singleLine);
         var etext_split = etext.Split("\n");
         var lines = etext_split.Length;
         var cols = etext_split.Select(s => s.Length).Max();

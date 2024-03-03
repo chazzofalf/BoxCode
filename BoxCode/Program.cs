@@ -41,6 +41,11 @@ OPERATION
                 File.WriteAllBytes(args[2],File.ReadAllText(args[1]).CreateBitmap().Encode(SKEncodedImageFormat.Png,100).ToArray());
                 return;
             }
+            else if (args[0] == "-e1")
+            {
+                File.WriteAllBytes(args[2],File.ReadAllText(args[1]).CreateBitmap(singleLine:true).Encode(SKEncodedImageFormat.Png,100).ToArray());
+                return;
+            }
             else if (args[0] == "-d")
             {
                 File.WriteAllText(args[2],SKBitmap.Decode(File.ReadAllBytes(args[1])).FromBitmap());

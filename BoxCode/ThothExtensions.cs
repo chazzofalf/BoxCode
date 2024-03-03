@@ -84,7 +84,7 @@ public static class ThothExtensions
         var sd = SqrtCeilingSize(str);
         return Math.Max(8,sd);
     }
-    private static IEnumerable<IEnumerable<char>> Lines(this IEnumerable<char> str) => str.Chunk(str.MinimumDimensionSize());
+    private static IEnumerable<IEnumerable<char>> Lines(this IEnumerable<char> str,bool singleLine) => !singleLine ? str.Chunk(str.MinimumDimensionSize()) : Enumerable.Repeat(str,1);
 
     private static string LinedStr(this IEnumerable<IEnumerable<char>> lines) => string.Join("\n",lines.Select(line => string.Join("",line)));
     
@@ -265,7 +265,7 @@ public static class ThothExtensions
         str
         .Concat(str.Reverse().Skip(1));
     
-    public static IEnumerable<char> ThothCode(this IEnumerable<char> str) => string.Join(" ",string.Join(" ",str.GetAntithesis().Words().Pal2().Select((w) => new string(w.Pal1().ToArray())))).Lines().LinedStr().PennedString();
+    public static IEnumerable<char> ThothCode(this IEnumerable<char> str, bool singleLine) => string.Join(" ",string.Join(" ",str.GetAntithesis().Words().Pal2().Select((w) => new string(w.Pal1().ToArray())))).Lines(singleLine).LinedStr().PennedString();
     public static IEnumerable<char> ThothAnticode(this IEnumerable<char> str,bool padded) 
     {
         var x = string.Join("",str);
@@ -279,8 +279,8 @@ public static class ThothExtensions
     
     private static IEnumerable<char> GetAntithesis(this IEnumerable<char> str) => str
     .Select((ch) => ch.GetAntiLetter());
-    public static string ThothString(this string str) => 
-    string.Join("",str.ThothCode().ToArray());
+    public static string ThothString(this string str, bool singleLine=false) => 
+    string.Join("",str.ThothCode(singleLine).ToArray());
     public static string UnthothString(this string str,bool padded=false) => 
     string.Join("",str.ThothAnticode(padded).ToArray());
     
