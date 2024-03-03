@@ -37,11 +37,11 @@ public class PenCode
         }
     }
 
-    private static async Task WorkOnBitmap(SKBitmap bmp,char[][] matrix)
+    private static async Task WorkOnBitmap(SKBitmap bmp,char[][] matrix,bool trimmed=false)
     {
-        await WorkOnBitmap(bmp,0,0,matrix[0].Length-1,matrix.Length-1,matrix);
+        await WorkOnBitmap(bmp,0,0,matrix[0].Length-1,matrix.Length-1,matrix,trimmed);
     }
-    private static async Task WorkOnBitmap(SKBitmap bmp,int l, int t,int r,int b,char[][] matrix)
+    private static async Task WorkOnBitmap(SKBitmap bmp,int l, int t,int r,int b,char[][] matrix,bool trimmed)
     {
         int w = (r+1)-l;
         int h = (b+1)-t;
@@ -55,11 +55,11 @@ public class PenCode
                 {
                     if (matrix[y][x] == '#')
                     {
-                        bmp.SetPixel(x+1,y+1,SKColors.White);
+                        bmp.SetPixel(x+(! trimmed ? 1 : 0),y+(! trimmed ? 1 : 0),SKColors.White);
                     }
                     else
                     {
-                        bmp.SetPixel(x+1,y+1,SKColors.Black);
+                        bmp.SetPixel(x+(! trimmed ? 1 : 0),y+(! trimmed ? 1 : 0),SKColors.Black);
                     }                    
                 }
             }
@@ -77,8 +77,8 @@ public class PenCode
                 var r2 = r;
                 var b2 = b;
                 await Task.WhenAll(
-                    WorkOnBitmap(bmp,l1,t1,r1,b1,matrix),
-                    WorkOnBitmap(bmp,l2,t2,r2,b2,matrix)
+                    WorkOnBitmap(bmp,l1,t1,r1,b1,matrix,trimmed),
+                    WorkOnBitmap(bmp,l2,t2,r2,b2,matrix,trimmed)
                 );
             }
             else
@@ -92,8 +92,8 @@ public class PenCode
                 var r2 = r;
                 var b2 = b;
                 await Task.WhenAll(
-                    WorkOnBitmap(bmp,l1,t1,r1,b1,matrix),
-                    WorkOnBitmap(bmp,l2,t2,r2,b2,matrix)
+                    WorkOnBitmap(bmp,l1,t1,r1,b1,matrix,trimmed),
+                    WorkOnBitmap(bmp,l2,t2,r2,b2,matrix,trimmed)
                 );
             }
             
@@ -152,6 +152,22 @@ public class PenCode
         }
     }
     public string PenRowsStr => string.Join("\n",PenRows);
+    public SKBitmap PenRowBmpTrimmed 
+    {
+        get
+        {
+            var lines = PenRows.Length;
+        var cols = PenRows.Select(s => s.Length).Max();
+            var bmp = new SKBitmap(cols,lines);
+        var matrix = Enumerable.Range(0,lines).Select(r => Enumerable.Range(0,cols).Select(c => PenRows[r].Length > c ? PenRows[r][c] : ' ').ToArray()).ToArray();
+        
+    
+        Task.WhenAll(
+            WorkOnBitmap(bmp,matrix,true)            
+        ).Wait();
+        return bmp;
+        }
+    }
     public SKBitmap PenRowsBmp {
         get
         {

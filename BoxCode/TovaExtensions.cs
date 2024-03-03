@@ -15,17 +15,22 @@ public static class TovaExtensions
     .ConvertToGraphics()
     .AssembleBitmap(singleLine)
     .FinishBitmap();
-
-    public static string TovaString(this string str,bool singleLine=false) {
-        var bmp = str.TovaBitmap(singleLine);
-        var unfinishedBmp = new SKBitmap(bmp.Width-1,bmp.Height-1);
+    
+    public static SKBitmap UnfinishBitmap(this SKBitmap bitmap)
+    {
+        var unfinishedBmp = new SKBitmap(bitmap.Width-1,bitmap.Height-1);
         var canvas = new SKCanvas(unfinishedBmp);
-        canvas.DrawBitmap(bmp,new SKRect(1,1,bmp.Width-2,bmp.Height-2),new SKRect(0,0,unfinishedBmp.Width-1,unfinishedBmp.Height-1));
+        canvas.DrawBitmap(bitmap,new SKRect(1,1,bitmap.Width-2,bitmap.Height-2),new SKRect(0,0,unfinishedBmp.Width-1,unfinishedBmp.Height-1));
         canvas.Flush();
-        return Enumerable.Range(0,unfinishedBmp.Height)
-            .SelectMany(s => Enumerable.Range(0,unfinishedBmp.Width)
+        return unfinishedBmp;
+    }
+    public static string TovaString(this string str,bool singleLine=false) {
+        var bmp = str.TovaBitmap(singleLine).UnfinishBitmap();
+        
+        return Enumerable.Range(0,bmp.Height)
+            .SelectMany(s => Enumerable.Range(0,bmp.Width)
             .Select(s2 => (X:s2,Y:s)))
-            .Select(s => (X:s.X,Y:s.Y,Color:unfinishedBmp.GetPixel(s.X,s.Y)))
+            .Select(s => (X:s.X,Y:s.Y,Color:bmp.GetPixel(s.X,s.Y)))
             .Select(s => (X:s.X,Y:s.Y,Ch:s.Color == SKColors.White ? '#' : ' '))
             .GroupBy(s => s.Y)
             .Select(s => s.OrderBy(s2 => s2.X).Select(s2 => s2.Ch))
@@ -62,7 +67,7 @@ public static class TovaExtensions
     .Where(pc => pc.IsReverseStart));
     private static IEnumerable<SKBitmap> ConvertToGraphics(this IEnumerable<PenCode> penCodes) =>
         penCodes
-        .Select(pc => pc.PenRowsBmp);
+        .Select(pc => pc.PenRowBmpTrimmed);
     private static SKBitmap AssembleBitmap(this IEnumerable<SKBitmap> bitmaps,bool singleLine) => singleLine ? 
     bitmaps.AssembleSingleLineBitmap() : 
     bitmaps.AssembleSquareBitmap();
@@ -74,7 +79,7 @@ public static class TovaExtensions
         {
             Color = SKColors.Black
         };
-        canvas.DrawRect(new SKRect(0,0,bitmap.Width-1,bitmap.Height-1),paint);
+        canvas.DrawRect(new SKRect(0,0,output.Width,output.Height),paint);
         canvas.DrawBitmap(bitmap,new SKPoint(1,1));        
         canvas.Flush();
         output.SetPixel(0,0,SKColors.White);
@@ -112,7 +117,7 @@ public static class TovaExtensions
         Enumerable.Range(0,cheight)
         .Aggregate(0,(y,cur) => 
         {
-            canvas.DrawBitmap(oneliner_bmp,new SKRect(owidth*cur,0,owidth*cur+owidth-1,height),new SKRect(0,height*cur,owidth-1,height*cur+height-1));
+            canvas.DrawBitmap(oneliner_bmp,new SKRect(owidth*cur,0,owidth*cur+owidth,height),new SKRect(0,height*cur,owidth-1,height*cur+height));
             return y;
         });
         canvas.Flush();
