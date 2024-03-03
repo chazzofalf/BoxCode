@@ -5,7 +5,7 @@
     style="display: block; 
            margin-left: auto;
            margin-right: auto;
-           width: 50%;"
+           width: 100%;"
     src="title.png" 
     alt="Our logo">
 </img>
