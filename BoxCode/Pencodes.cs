@@ -44,7 +44,7 @@ public static class Pencodes
 
     public static PenCode PenCodeForPenRows(this string[] penrows)
     {
-        var x = Pencodes.LetteredPenCodes.Select(pc => (PenCode:pc,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
+        var x = Pencodes.PenCodes.Select(pc => (PenCode:pc,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
         var y = x.Select(s => (PenCode:s.PenCode,MatchTests:s.PenRowPairs.Select(s2 => s2.PenRowA == s2.PenRowB)));
         var z = y.Select(s => (PenCode:s.PenCode,Match:!s.MatchTests.Where(s2 => !s2).Any()));
         var a = z.Where(s => s.Match).Select(s => s.PenCode).Single();

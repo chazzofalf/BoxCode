@@ -15,14 +15,17 @@ internal class Program
         var helptext= @"
 BoxCode OPERATION input output
 OPERATION
--e Encode a text into a image.
+-e Encode a text into a image. Squared.
+-e1 Encode a text into a image. Single Line.
 -d Decode a text from a image.
 ";
             System.Console.WriteLine(helptext);
     }
     private static void Main(string[] args)
     {
-var td = "C:\\Temp\\Fonts";
+
+        // var rect = new SKRect(0,0,4,4);
+        // System.Console.WriteLine(rect.Size);
         
         if (args.Length == 0)
         {
@@ -42,7 +45,7 @@ var td = "C:\\Temp\\Fonts";
             if (args[0] == "-ef")
             {
                 Directory.CreateDirectory(args[1]);
-                Pencodes.PenCodes.Aggregate((object)null,(nothing,cur) => {
+                Pencodes.PenCodes.Aggregate((object?)null,(nothing,cur) => {
                     char letter = cur.Letter[0];
                     try
                     {
@@ -60,31 +63,23 @@ var td = "C:\\Temp\\Fonts";
         }
         else if (args.Length == 3)
         {
-            if (args[0] == "-e")
-            {                
-                File.WriteAllBytes(args[2],File.ReadAllText(args[1]).CreateBitmap().Encode(SKEncodedImageFormat.Png,100).ToArray());
-                return;
-            }
-            else if (args[0] == "-e1")
-            {
-                File.WriteAllBytes(args[2],File.ReadAllText(args[1]).CreateBitmap(singleLine:true).Encode(SKEncodedImageFormat.Png,100).ToArray());
-                return;
-            }
-            else if (args[0] == "-ve1")
+            
+            if (args[0] == "-e1")
             {
                 File.WriteAllBytes(args[2],File.ReadAllText(args[1]).TovaBitmap(singleLine:true).Encode(SKEncodedImageFormat.Png,100).ToArray());
                 return;
             }
-            else if (args[0] == "-ve")
+            else if (args[0] == "-e")
             {
                 File.WriteAllBytes(args[2],File.ReadAllText(args[1]).TovaBitmap(singleLine:false).Encode(SKEncodedImageFormat.Png,100).ToArray());
                 return;
             }
             else if (args[0] == "-d")
             {
-                File.WriteAllText(args[2],SKBitmap.Decode(File.ReadAllBytes(args[1])).FromBitmap());
+                File.WriteAllText(args[2],SKBitmap.Decode(File.ReadAllBytes(args[1])).TovaFromBitmap());
                 return;
             }
+            
             
         }
         GetHelp();

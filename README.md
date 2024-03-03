@@ -1,17 +1,17 @@
 
-![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
+![BoxCode - A wild take on the pig pen cipher.](mesg1.png)
 <p align="center">
 <img 
     style="display: block; 
            margin-left: auto;
            margin-right: auto;
            width: 33%;"    
-    src="title.png" 
+    src="center_block.png" 
     alt="Our logo">
 </img>
 </p>
 
-![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
+![BoxCode - A wild take on the pig pen cipher.](title.png)
 
 # Box Code
 
@@ -67,6 +67,7 @@ End with an example of getting some data out of the system or using it for a lit
 ```
 BoxCode OPERATION input output
 OPERATION
--e Encode a text into a image.
+-e Encode a text into a image. Squared.
+-e1 Encode a text into a image. Single Line.
 -d Decode a text from a image.
 ```
