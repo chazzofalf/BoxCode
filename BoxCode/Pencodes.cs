@@ -42,14 +42,18 @@ public static class Pencodes
     .Select(s => new PenCode(letter:s.Letter,s.PenRows
     .Append(string.Join("",Enumerable.Repeat(" ",CenterSlattedPenCodes.First().PenRows.First().Count()))).ToArray())).ToArray();
 
-    public static char LetterForPenRows(this string[] penrows)
+    public static PenCode PenCodeForPenRows(this string[] penrows)
     {
-        var x = Pencodes.PenCodes.Select(pc => (Letter:pc.Letter,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
-        var y = x.Select(s => (Letter:s.Letter,MatchTests:s.PenRowPairs.Select(s2 => s2.PenRowA == s2.PenRowB)));
-        var z = y.Select(s => (Letter:s.Letter,Match:!s.MatchTests.Where(s2 => !s2).Any()));
-        var a = z.Where(s => s.Match).Select(s => s.Letter).Single();
-        return a[0];
+        var x = Pencodes.LetteredPenCodes.Select(pc => (PenCode:pc,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
+        var y = x.Select(s => (PenCode:s.PenCode,MatchTests:s.PenRowPairs.Select(s2 => s2.PenRowA == s2.PenRowB)));
+        var z = y.Select(s => (PenCode:s.PenCode,Match:!s.MatchTests.Where(s2 => !s2).Any()));
+        var a = z.Where(s => s.Match).Select(s => s.PenCode).Single();
+        return a;
     }
+    public static char LetterForPenRows(this string[] penrows) =>
+    
+        penrows.PenCodeForPenRows().Letter[0];
+        
 
     public static PenCode[] SideSpacedPenCodes =>  _sideSpacedPenCodes ??= GetSideSpacedPenCodes();
     
@@ -63,10 +67,14 @@ public static class Pencodes
 
     public static PenCode[] PenCodes => _pencodes ??= GetPenCodes();
 
+    public static PenCode[] LetteredPenCodes => PenCodes
+    .Where(pc => !pc.IsSpecial)
+    .Where(pc => pc.Letter.Length == 1)
+    .ToArray();
+
     public static PenCode[] GetPenCodes()
     {
-        return GetPrePenCodes()
-        .Where((pc) => pc.Letter.Length == 1)
+        return GetPrePenCodes()        
         .ToArray();
     }
     private static PenCode[] GetPrePenCodes()

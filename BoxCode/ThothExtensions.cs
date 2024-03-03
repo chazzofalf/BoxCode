@@ -90,8 +90,8 @@ public static class ThothExtensions
     
     private static string UnpennedString(this string pennedStr)
     {
-        var cwidth = Pencodes.PenCodes.First().PenRows.First().Length;
-        var cheight = Pencodes.PenCodes.First().PenRows.Count();
+        var cwidth = Pencodes.LetteredPenCodes.First().PenRows.First().Length;
+        var cheight = Pencodes.LetteredPenCodes.First().PenRows.Count();
         var x15 = pennedStr;
         var x14 =  x15.Split("\n");
         var x13 = x14.Select(s => s.Chunk(cwidth).Select(s2 => string.Join("",s2)).ToArray()).ToArray();
@@ -136,7 +136,7 @@ public static class ThothExtensions
         var x = linedstr;
         var x1 = x.Split("\n");
         var x2 = x1.Select((s) => s.Select(c => c));
-        var x3 = x2.Select(s =>  s.SelectMany( c=> Pencodes.PenCodes.Where(pc => pc.Letter == $"{c}").Select((pc) => pc.PenRows.Select(ss => ss))));
+        var x3 = x2.Select(s =>  s.SelectMany( c=> Pencodes.LetteredPenCodes.Where(pc => pc.Letter == $"{c}").Select((pc) => pc.PenRows.Select(ss => ss))));
         var x4 = x3.Zip(Enumerable.Range(0,int.MaxValue),(row,index)=> (RowIndex:index,Row:row));
         var x5 = x4.Select(s => (RowIndex:s.RowIndex,Row:(s.Row.Zip(Enumerable.Range(0,int.MaxValue),(column,columnIndex) => (ColumnIndex:columnIndex,Column:column)))));
         var x6 = x5.Select(s => (RowIndex:s.RowIndex,Row:(s.Row.Select(s2 => (ColumnIndex:s2.ColumnIndex,Column:s2.Column.Zip(Enumerable.Range(0,int.MaxValue),(columnSeg,columnSegIndex) => (ColumnSegmentIndex:columnSegIndex,ColumnSegment:columnSeg)))))));
@@ -223,7 +223,7 @@ public static class ThothExtensions
         :
             GetConsonant(-1*letter.GetConsonantIndex()-1)
          : letter;
-    private static IEnumerable<char> PencodeLetters => Pencodes.PenCodes
+    private static IEnumerable<char> PencodeLetters => Pencodes.LetteredPenCodes
     .Select((pc) => pc.Letter[0]);
     private static char GetAntiLetter(this char letter) => letter
     .GetAntiSpecial()
@@ -277,7 +277,7 @@ public static class ThothExtensions
         return x4;
     }
     
-    private static IEnumerable<char> GetAntithesis(this IEnumerable<char> str) => str
+    internal static IEnumerable<char> GetAntithesis(this IEnumerable<char> str) => str
     .Select((ch) => ch.GetAntiLetter());
     public static string ThothString(this string str, bool singleLine=false) => 
     string.Join("",str.ThothCode(singleLine).ToArray());

@@ -1,5 +1,10 @@
 [
     {"Letter":" ",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",     
     "PenRows":[
         "             ",
         "             ",
@@ -18,6 +23,11 @@
         "             "
     ]},
     {"Letter":"A",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -37,6 +47,11 @@
     ]
     },
     {"Letter":"a",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -56,6 +71,11 @@
     ]
     },
     {"Letter":"B",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -75,6 +95,11 @@
     ]
     },
     {"Letter":"b",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -94,6 +119,11 @@
     ]
     },
     {"Letter":"C",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -113,6 +143,11 @@
     ]
     },
     {"Letter":"c",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -132,6 +167,11 @@
     ]
     },
     {"Letter":"D",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -151,6 +191,11 @@
     ]
     },
     {"Letter":"d",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -170,6 +215,11 @@
     ]
     },
     {"Letter":"E",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -189,6 +239,11 @@
     ]
     },
     {"Letter":"e",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -208,6 +263,11 @@
     ]
     },
     {"Letter":"F",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -227,6 +287,11 @@
     ]
     },
     {"Letter":"f",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -246,6 +311,11 @@
     ]
     },
     {"Letter":"G",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -265,6 +335,11 @@
     ]
     },
     {"Letter":"g",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -284,6 +359,11 @@
     ]
     },
     {"Letter":"H",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -303,6 +383,11 @@
     ]
     },
     {"Letter":"h",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -322,6 +407,11 @@
     ]
     },
     {"Letter":"I",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -341,6 +431,11 @@
     ]
     },
     {"Letter":"i",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -360,6 +455,11 @@
     ]
     },
     {"Letter":"J",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -379,6 +479,11 @@
     ]
     },
     {"Letter":"j",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -398,6 +503,11 @@
     ]
     },
     {"Letter":"K",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -417,6 +527,11 @@
     ]
     },
     {"Letter":"k",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -436,6 +551,11 @@
     ]
     },
     {"Letter":"L",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -455,6 +575,11 @@
     ]
     },
     {"Letter":"l",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -474,6 +599,11 @@
     ]
     },
     {"Letter":"M",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -493,6 +623,11 @@
     ]
     },
     {"Letter":"m",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -512,6 +647,11 @@
     ]
     },
     {"Letter":"N",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -531,6 +671,11 @@
     ]
     },
     {"Letter":"n",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -550,6 +695,11 @@
     ]
     },
     {"Letter":"O",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -569,6 +719,11 @@
     ]
     },
     {"Letter":"o",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -588,6 +743,11 @@
     ]
     },
     {"Letter":"P",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -607,6 +767,11 @@
     ]
     },
     {"Letter":"p",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -626,6 +791,11 @@
     ]
     },
     {"Letter":"Q",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -645,6 +815,11 @@
     ]
     },
     {"Letter":"q",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -664,6 +839,11 @@
     ]
     },
     {"Letter":"R",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -683,6 +863,11 @@
     ]
     },
     {"Letter":"r",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -702,6 +887,11 @@
     ]
     },
     {"Letter":"S",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -721,6 +911,11 @@
     ]
     },
     {"Letter":"s",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -740,6 +935,11 @@
     ]
     },
     {"Letter":"T",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -759,6 +959,11 @@
     ]
     },
     {"Letter":"t",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -778,6 +983,11 @@
     ]
     },
     {"Letter":"U",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -797,6 +1007,11 @@
     ]
     },
     {"Letter":"u",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -816,6 +1031,11 @@
     ]
     },
     {"Letter":"V",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -835,6 +1055,11 @@
     ]
     },
     {"Letter":"v",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -854,6 +1079,11 @@
     ]
     },
     {"Letter":"W",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -873,6 +1103,11 @@
     ]
     },
     {"Letter":"w",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -892,6 +1127,11 @@
     ]
     },
     {"Letter":"Y",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -911,6 +1151,11 @@
     ]
     },
     {"Letter":"y",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -930,6 +1175,11 @@
     ]
     },
     {"Letter":"X",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -949,6 +1199,11 @@
     ]
     },
     {"Letter":"x",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -968,6 +1223,11 @@
     ]
     },
     {"Letter":"0",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -987,6 +1247,11 @@
     ]
     },
     {"Letter":"4",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -1006,6 +1271,11 @@
     ]
     },
     {"Letter":"1",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1025,6 +1295,11 @@
     ]
     },
     {"Letter":"5",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1044,6 +1319,11 @@
     ]
     },
     {"Letter":"2",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -1063,6 +1343,11 @@
     ]
     },
     {"Letter":"6",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -1082,6 +1367,11 @@
     ]
     },
     {"Letter":"Z",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1101,6 +1391,11 @@
     ]
     },
     {"Letter":"z",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1120,6 +1415,11 @@
     ]
     },
     {"Letter":"3",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1139,6 +1439,11 @@
     ]
     },
     {"Letter":"7",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1158,6 +1463,11 @@
     ]
     },
     {"Letter":"8",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -1177,6 +1487,11 @@
     ]
     },
     {"Letter":"<",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "            #",
         "            #",
@@ -1196,6 +1511,11 @@
     ]
     },
     {"Letter":"9",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -1215,6 +1535,11 @@
     ]
     },
     {"Letter":"=",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -1234,6 +1559,11 @@
     ]
     },
     {"Letter":"+",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -1253,6 +1583,11 @@
     ]
     },
     {"Letter":">",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -1272,6 +1607,11 @@
     ]
     },
     {"Letter":"-",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -1291,6 +1631,11 @@
     ]
     },
     {"Letter":"[",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "            #",
@@ -1310,6 +1655,11 @@
     ]
     },
     {"Letter":"*",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -1329,6 +1679,11 @@
     ]
     },
     {"Letter":"_",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -1348,6 +1703,11 @@
     ]
     },
     {"Letter":"/",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -1367,6 +1727,11 @@
     ]
     },
     {"Letter":"]",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -1386,6 +1751,11 @@
     ]
     },
     {"Letter":"|",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -1405,6 +1775,11 @@
     ]
     },
     {"Letter":".",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "             ",
         "             ",
@@ -1424,6 +1799,11 @@
     ]
     },
     {"Letter":"{",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -1443,6 +1823,11 @@
     ]
     },
     {"Letter":"?",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "       #     ",
@@ -1462,6 +1847,11 @@
     ]
     },
     {"Letter":"}",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1481,6 +1871,11 @@
     ]
     },
     {"Letter":"!",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1500,6 +1895,11 @@
     ]
     },
     {"Letter":"(",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1519,6 +1919,11 @@
     ]
     },
     {"Letter":"\"",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1538,6 +1943,11 @@
     ]
     },
     {"Letter":")",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1557,6 +1967,11 @@
     ]
     },
     {"Letter":"'",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     #       ",
@@ -1576,6 +1991,11 @@
     ]
     },
     {"Letter":"&",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1595,6 +2015,11 @@
     ]
     },
     {"Letter":",",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "      #      ",
         "     # #     ",
@@ -1614,6 +2039,11 @@
     ]
     },
     {"Letter":":",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -1633,6 +2063,11 @@
     ]
     },
     {"Letter":"^",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#           #",
         "#           #",
@@ -1652,6 +2087,11 @@
     ]
     },
     {"Letter":";",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -1671,6 +2111,11 @@
     ]
     },
     {"Letter":"\\",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#            ",
         "#            ",
@@ -1690,6 +2135,11 @@
     ]
     },
     {"Letter":"$",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -1709,6 +2159,11 @@
     ]
     },
     {"Letter":"~",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -1728,6 +2183,11 @@
     ]
     },
     {"Letter":"%",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -1747,6 +2207,11 @@
     ]
     },
     {"Letter":"`",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -1766,6 +2231,11 @@
     ]
     },
     {"Letter":"#",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#           #",
@@ -1785,6 +2255,11 @@
     ]
     },
     {"Letter":"",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"false",
     "PenRows":[
         "#############",
         "#           #",
@@ -1802,9 +2277,13 @@
         "             ",
         "             "
     ]
-    }
-    ,
+    },
     {"Letter":"@",
+     "IsSpecial":"false",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
     "PenRows":[
         "#############",
         "#            ",
@@ -1822,6 +2301,77 @@
         "             ",
         "      #      "
     ]
-    }
+    },
+    {"Letter":"",
+     "IsSpecial":"true",
+     "IsStart":"true",
+     "IsReverseStart":"false",
+     "IsEnd":"false",
+     "IsUsed":"true",
+    "PenRows":[
+        "   #  #  #   ",
+        "    #  #  #  ",
+        "     #  #  # ",
+        "      #  #  #",
+        "     #  #  # ",
+        "    #  #  #  ",
+        "   #  #  #   ",
+        "#############",
+        "   #  #  #   ",
+        "    #  #  #  ",
+        "     #  #  # ",
+        "      #  #  #",
+        "     #  #  # ",
+        "    #  #  #  ",
+        "   #  #  #   "
+    ]
+    },
+    {"Letter":"",
+     "IsSpecial":"true",
+     "IsStart":"false",
+     "IsReverseStart":"true",
+     "IsEnd":"false",
+     "IsUsed":"true",
+    "PenRows":[
+        "   #  #  #   ",
+        "  #  #  #    ",
+        " #  #  #     ",
+        "#  #  #      ",
+        " #  #  #     ",
+        "  #  #  #    ",
+        "   #  #  #   ",
+        "#############",
+        "   #  #  #   ",
+        "  #  #  #    ",
+        " #  #  #     ",
+        "#  #  #      ",
+        " #  #  #     ",
+        "  #  #  #    ",
+        "   #  #  #   "
+    ]
+    },
+    {"Letter":"",
+     "IsSpecial":"true",
+     "IsStart":"false",
+     "IsReverseStart":"false",
+     "IsEnd":"true",
+     "IsUsed":"true",     
+    "PenRows":[
+        "#####   #####",
+        "#   #   #   #",
+        "#   #####   #",
+        "#   #   #   #",
+        "#####   #####",
+        "#   #   #   #",
+        "#   #####   #",
+        "#   #   #   #",
+        "#####   #####",
+        "#   #   #   #",
+        "#   #####   #",
+        "#   #   #   #",
+        "#####   #####",
+        "#   #   #   #",
+        "#   #####   #"
+    ]}
     
 ]
