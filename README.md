@@ -1,6 +1,14 @@
-# Box Code
+
+![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
+<div style="text-align: center;">
 
 ![BoxCode - A wild take on the pig pen cipher.](title.png)
+
+</div>
+
+![BoxCode - A wild take on the pig pen cipher.](title_one_line.png)
+
+# Box Code
 
 ## Table of Contents
 
