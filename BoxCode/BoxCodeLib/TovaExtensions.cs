@@ -20,7 +20,11 @@ internal static class TovaExtensions
     {
         var oncolor = bmp.GetPixel(0,0);
         var offcolor = bmp.GetPixel(0,1);
-        return bmp.WriteAndPassThru("TovaOriginal").SleepAndPass(100).Decolorize(oncolor,offcolor).WriteAndPassThru("TovaDecolorized").SleepAndPass(100)
+        if (oncolor == offcolor)
+        {
+            throw new ArgumentException("This is an invalid image.");
+        }
+        return bmp.Decolorize(oncolor,offcolor)
         .UnfinishBitmap()
         .SplitIntoSegments()
         .ConvertIntoPenRowSequences()
@@ -155,7 +159,9 @@ internal static class TovaExtensions
         .Select(ch => Pencodes.LetteredPenCodes
         .Where(pc => pc.Letter[0] == ch)
         .Select(pc => pc)
-        .Single());
+        .Concat(Pencodes.LetteredPenCodes
+            .Where(pc => pc.Letter[0] == ' '))
+        .First());
     private static IEnumerable<PenCode> ConvertToPencodePoststep(this IEnumerable<PenCode> penCodes) =>
     Pencodes.PenCodes
     .Where(pc => pc.IsSpecial)
@@ -198,7 +204,11 @@ internal static class TovaExtensions
                     else if (src.GetPixel(x,y) == SKColors.Black)
                     {
                         dest.SetPixel(x,y,offColor);
-                    }                    
+                    }       
+                    else
+                    {
+                        throw new ArgumentException();
+                    }
                 }
             }
         }
@@ -241,7 +251,7 @@ internal static class TovaExtensions
     private static async Task<SKBitmap> WorkOnBitmapDecolorize(SKBitmap bmp,SKColor onColor,SKColor offColor)
     {
         var copy = bmp.Copy();
-        await WorkOnBitmapColorize(bmp,copy,0,0,bmp.Width-1,bmp.Height-1,onColor,offColor);
+        await WorkOnBitmapDecolorize(bmp,copy,0,0,bmp.Width-1,bmp.Height-1,onColor,offColor);
         return copy;
     }
     private static async Task WorkOnBitmapDecolorize(SKBitmap src,SKBitmap dest,int l, int t,int r,int b,SKColor onColor,SKColor offColor)
@@ -263,7 +273,11 @@ internal static class TovaExtensions
                     else if (src.GetPixel(x,y) ==  offColor)
                     {
                         dest.SetPixel(x,y,SKColors.Black);
-                    }                    
+                    }
+                    else
+                    {
+                        throw new ArgumentException("This image is invalid.");
+                    }
                 }
             }
         }
@@ -280,8 +294,8 @@ internal static class TovaExtensions
                 var r2 = r;
                 var b2 = b;
                 await Task.WhenAll(
-                    WorkOnBitmapColorize(src,dest,l1,t1,r1,b1,onColor,offColor),
-                    WorkOnBitmapColorize(src,dest,l2,t2,r2,b2,onColor,offColor)
+                    WorkOnBitmapDecolorize(src,dest,l1,t1,r1,b1,onColor,offColor),
+                    WorkOnBitmapDecolorize(src,dest,l2,t2,r2,b2,onColor,offColor)
                 );
             }
             else
@@ -295,8 +309,8 @@ internal static class TovaExtensions
                 var r2 = r;
                 var b2 = b;
                 await Task.WhenAll(
-                    WorkOnBitmapColorize(src,dest,l1,t1,r1,b1,onColor,offColor),
-                    WorkOnBitmapColorize(src,dest,l2,t2,r2,b2,onColor,offColor)
+                    WorkOnBitmapDecolorize(src,dest,l1,t1,r1,b1,onColor,offColor),
+                    WorkOnBitmapDecolorize(src,dest,l2,t2,r2,b2,onColor,offColor)
                 );
             }
             
