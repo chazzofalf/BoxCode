@@ -36,14 +36,55 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackageIcon>boxcodeicon.png</PackageIcon>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>BoxCode</ApplicationTitle>
+	  <ApplicationId>com.chazztheinterpid.boxcodeapp</ApplicationId>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		 <!--App Icon--> 
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#40e0d0" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#40e0d0" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -57,9 +98,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="ResourceBed\messagebed.png" />
+	  <None Remove="Resources\Images\messagersrc.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <EmbeddedResource Include="ResourceBed\messagebed.png">
+      <LogicalName>DefaultPicture</LogicalName>
+    </EmbeddedResource>
+	</ItemGroup>
+
+	
+
+	
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	
+
+	
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BoxCodeLib\BoxCodeLib.csproj" />
+	</ItemGroup>
+
+	
+
+	
+
+	<ItemGroup>
+	  <MauiXaml Update="TextEditorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Resources\AppIcon\boxcodeicon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>

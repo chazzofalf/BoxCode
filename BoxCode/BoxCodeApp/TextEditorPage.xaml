@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BoxCodeApp.TextEditorPage"
+             Title="Enter your message.">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollView
+            Grid.Row="0"
+Grid.Column="0"
+Grid.ColumnSpan="2">
+            <Editor
+                AutoSize="TextChanges"
+                x:Name="BoxCodeText"/>
+        </ScrollView>
+        <ActivityIndicator
+            Scale="3"
+            Color="Turquoise"
+            IsVisible="True"
+            IsRunning="True"
+            x:Name="Busy"/>
+        <Button x:Name="SaveText"
+                Text="Save To Text File"
+                Clicked="SaveText_Clicked"
+                Grid.Row="2"
+                Grid.Column="1"></Button>
+        <Button x:Name="LoadText"
+                Text="Load From Text File"
+                Clicked="LoadText_Clicked"
+                Grid.Row="2"
+                Grid.Column="0"/>
+        <Button x:Name="SaveToImage"
+                Text="Save To Image"
+                Clicked="SaveToImage_Clicked"
+                Grid.Row="1"
+                Grid.Column="1"/>
+        <Button x:Name="Cancel"
+                Text="Cancel"
+                Clicked="Cancel_Clicked"
+                Grid.Row="1"
+                Grid.Column="0"/>
+
+    </Grid>
+</ContentPage>

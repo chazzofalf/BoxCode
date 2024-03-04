@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "BoxCodeCLI": {
+      "commandName": "Project",
+      "commandLineArgs": "-e message.txt message.png",
+      "workingDirectory": "C:\\Users\\charl\\data"
+    }
+  }
+}
