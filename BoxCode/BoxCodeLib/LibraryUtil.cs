@@ -12,4 +12,12 @@ public static class LibraryUtil
     {
         return bitmap.TovaFromBitmap();
     }
+    public static bool IsValid(SKBitmap bitmap, string[]? output=null)
+    {
+        return bitmap.TovaIsValid(output);
+    }
+    public static bool IsSingleLine(SKBitmap bitmap)
+    {
+        return bitmap.TovaIsSingleLine();
+    }
 }

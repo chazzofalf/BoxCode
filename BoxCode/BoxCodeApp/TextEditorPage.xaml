@@ -8,6 +8,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -47,6 +48,19 @@ Grid.ColumnSpan="2">
                 Clicked="Cancel_Clicked"
                 Grid.Row="1"
                 Grid.Column="0"/>
+        <HorizontalStackLayout
+                Grid.Row="3"
+                Grid.Column="0"
+                >
+            <Label HorizontalOptions="StartAndExpand"
+                   Text="Single Line"
+                   HorizontalTextAlignment="Center"/>
+            <CheckBox HorizontalOptions="Start"
+                      x:Name="SingleLine"/>
+
+        </HorizontalStackLayout>
+        
+            
 
     </Grid>
 </ContentPage>

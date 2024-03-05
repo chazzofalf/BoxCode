@@ -8,6 +8,7 @@ namespace BoxCodeLib;
 
 internal static class TovaExtensions
 {
+    public static bool TovaIsSingleLine(this SKBitmap bitmap) => bitmap.TovaIsValid() ? bitmap.IsSingleLine() : false;
     public static SKBitmap TovaBitmap(this string str, bool singleLine=false,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null) =>     
     str.GetAntithesis()
     .ConvertToPencodePrestep()
@@ -16,6 +17,23 @@ internal static class TovaExtensions
     .AssembleBitmap(singleLine)
     .FinishBitmap()
     .Colorize(onColor,offColor,hexColorOn,hexColorOff);
+
+    public static bool TovaIsValid(this SKBitmap bitmap, string[]? output=null)
+    {
+        try
+        {
+            var outx = TovaFromBitmap(bitmap);
+            if (output != null && output.Length == 1)
+            {
+                output[0] = outx;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
     public static string TovaFromBitmap(this SKBitmap bmp) 
     {
         var oncolor = bmp.GetPixel(0,0);
@@ -102,6 +120,14 @@ internal static class TovaExtensions
         var name = $"{basename}_{yearStr}{monthStr}{dayStr}_{hourStr}{minuteStr}{secondStr}.{microsecondStr}_{random}.png";
         File.WriteAllBytes($"C:\\Temp\\{name}",bmp.Encode(SKEncodedImageFormat.Png,100).ToArray() );
         return bmp;
+    }
+    public static bool IsSingleLine(this SKBitmap bitmap)
+    {
+        int segWidth = Pencodes.PenCodes.First().PenRowBmpTrimmed.Width;
+        int segHeight = Pencodes.PenCodes.First().PenRowBmpTrimmed.Height;
+        int segsPerWidth = bitmap.Width / segWidth;
+        int segsPerHeight = bitmap.Height / segHeight;
+        return segsPerHeight == 1;
     }
     public static IEnumerable<SKBitmap> SplitIntoSegments(this SKBitmap bitmap)
     {

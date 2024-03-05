@@ -23,11 +23,12 @@ public partial class TextEditorPage : ContentPage
         if (app != null)
         {
             var text = BoxCodeLib.LibraryUtil.ConvertFromBitmap(app.LoadedImage);
-            
+            var isSingleLine = BoxCodeLib.LibraryUtil.IsSingleLine(app.LoadedImage);
             App.Current.Dispatcher.Dispatch(() =>
             {
                 BoxCodeText.Text = text;
                 Busy.IsRunning = Busy.IsVisible = false;
+                SingleLine.IsChecked = isSingleLine;
             });
         }
     }
@@ -37,7 +38,7 @@ public partial class TextEditorPage : ContentPage
         var app = (App.Current as App);
         if (app != null)
         {
-            app.LoadedImage = BoxCodeLib.LibraryUtil.ConvertToBitmap(BoxCodeText.Text,singleLine:false);
+            app.LoadedImage = BoxCodeLib.LibraryUtil.ConvertToBitmap(BoxCodeText.Text,singleLine:SingleLine.IsChecked);
             App.Current.Dispatcher.Dispatch(() =>
             {
                 Navigation.PopAsync();

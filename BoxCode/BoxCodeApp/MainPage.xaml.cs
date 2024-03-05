@@ -20,9 +20,10 @@ public partial class MainPage : ContentPage
         Busy.IsRunning = Busy.IsVisible = true;
         Task.Run(RetrieveImage);
     }
-    private void ValidateImage(SKBitmap bitmap)
+    private bool ValidateImage(SKBitmap bitmap)
     {
-        var _ = BoxCodeLib.LibraryUtil.ConvertFromBitmap(bitmap);
+        return BoxCodeLib.LibraryUtil.IsValid(bitmap);
+        
     }
     public async Task RetrieveImage()
     {
@@ -88,12 +89,19 @@ public partial class MainPage : ContentPage
                     try
                     {
                         var bitmap = SKBitmap.Decode(flr.FullPath);
-                        ValidateImage(bitmap);
-                        app.LoadedImage = SKBitmap.Decode(flr.FullPath);
-                        app.Dispatcher.Dispatch(() =>
+                        if (ValidateImage(bitmap))
                         {
-                            Refresh();
-                        });
+                            app.LoadedImage = bitmap;
+                            app.Dispatcher.Dispatch(() =>
+                            {
+                                Refresh();
+                            });
+                        }
+                        else
+                        {
+                            await CommunityToolkit.Maui.Alerts.Toast.Make("This was an invalid image.").Show();
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
