@@ -9,6 +9,45 @@ namespace BoxCodeLib;
 internal static class TovaExtensions
 {
     public static bool TovaIsSingleLine(this SKBitmap bitmap) => bitmap.TovaIsValid() ? bitmap.IsSingleLine() : false;
+
+    public static SKBitmap TovaBitmapMultiline(this string str,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null)
+    {
+        return str.Split("\n")
+            .Select(s => s.TovaBitmap(singleLine: true, onColor: onColor, offColor: offColor, hexColorOn: hexColorOn, hexColorOff: hexColorOff))
+            .AssembleBitmapMultiline();
+
+    }
+    public static SKBitmap AssembleBitmapMultiline(this IEnumerable<SKBitmap> bitmapLines)
+    {
+        var segHeight = Pencodes.LetteredPenCodes.First().PenRowsBmp.Height;
+        var totalHeight = segHeight * bitmapLines.Count();
+        var totalWidth = bitmapLines
+            .Select(s => s.Width)
+            .Max();
+        var bmp = new SKBitmap(totalWidth, totalHeight);
+        var canvas = new SKCanvas(bmp);
+        bitmapLines.Aggregate(0, (y, current) =>
+        {
+            var lineHeight = current.Height;
+            var lineWidth = current.Width;
+            var xPos = (totalWidth - lineWidth) / 2;
+            canvas.DrawBitmap(current, new SKPoint(x: xPos, y: y));
+            return y+lineHeight;
+        });
+        canvas.Flush();
+        return bmp;
+    }
+    public static bool IsMultiline(this SKBitmap bitmap)
+    {
+        return 1 < Enumerable.Range(0, bitmap.Height)
+            .SelectMany(y => Enumerable.Range(0, bitmap.Width)
+            .Select(x => (X: x, Y: y)))
+            .Aggregate((LinesCounted:0,TopLeft:((int X,int Y)?)null,TopRight:((int X,int Y)?)null,BottomLeft:((int X,int Y)?)null,BottomRight:((int X,int Y)?)null),(state,currentCoordinate) =>
+            {
+                // Time to turn in for the night. I AM HERE!!! TODO: Start from here.
+                return state;
+            },(fin) => fin.LinesCounted);
+    }
     public static SKBitmap TovaBitmap(this string str, bool singleLine=false,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null) =>     
     str.GetAntithesis()
     .ConvertToPencodePrestep()
