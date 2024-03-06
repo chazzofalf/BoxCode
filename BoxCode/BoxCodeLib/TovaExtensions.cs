@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using SkiaSharp;
 
 namespace BoxCodeLib;
@@ -10,16 +11,18 @@ internal static class TovaExtensions
 {
     public static bool TovaIsSingleLine(this SKBitmap bitmap) => bitmap.TovaIsValid() ? bitmap.IsSingleLine() : false;
 
-    public static SKBitmap TovaBitmapMultiline(this string str,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null)
+    private static SKBitmap TovaBitmapMultiline(this string str,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null)
     {
-        return str.Split("\n")
-            .Select(s => s.TovaBitmap(singleLine: true, onColor: onColor, offColor: offColor, hexColorOn: hexColorOn, hexColorOff: hexColorOff))
-            .AssembleBitmapMultiline();
+        return Regex.Split(str, "\r\n|\r|\n")
+            .Select(s => s.TovaBitmap(singleLine: true))
+            .AssembleBitmapMultiline()
+            .FinishBitmap(bright:false)
+            .Colorize(onColor:onColor,offColor:offColor,hexColorOn:hexColorOn,hexColorOff:hexColorOff);
 
     }
-    public static SKBitmap AssembleBitmapMultiline(this IEnumerable<SKBitmap> bitmapLines)
+    private static SKBitmap AssembleBitmapMultiline(this IEnumerable<SKBitmap> bitmapLines)
     {
-        var segHeight = Pencodes.LetteredPenCodes.First().PenRowsBmp.Height;
+        var segHeight = bitmapLines.First().Height;
         var totalHeight = segHeight * bitmapLines.Count();
         var totalWidth = bitmapLines
             .Select(s => s.Width)
@@ -48,32 +51,271 @@ internal static class TovaExtensions
                 return state;
             },(fin) => fin.LinesCounted);
     }
-    public static SKBitmap TovaBitmap(this string str, bool singleLine=false,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null) =>     
+    public static SKBitmap TovaBitmap(this string str, bool singleLine=false,SKColor? onColor=null,SKColor? offColor=null,string? hexColorOn=null,string? hexColorOff=null) =>
+    Regex.Split(str, "\r\n|\r|\n").Length > 1 ? str.TovaBitmapMultiline(onColor:onColor,offColor:offColor,hexColorOn:hexColorOn,hexColorOff:hexColorOff) :
     str.GetAntithesis()
     .ConvertToPencodePrestep()
     .ConvertToPencodePoststep()
     .ConvertToGraphics(onColor,offColor,hexColorOn,hexColorOff)
-    .AssembleBitmap(singleLine)
+    .AssembleBitmap(singleLine)    
     .FinishBitmap()
     .Colorize(onColor,offColor,hexColorOn,hexColorOff);
 
-    public static bool TovaIsValid(this SKBitmap bitmap, string[]? output=null)
+    
+    public static bool TovaIsValid(this SKBitmap bitmap, string[]? output = null) => bitmap.TovaIsValidSingleLine(output: output) || bitmap.TovaIsValidMultiline(output:output);
+
+    private static bool TovaIsValidMultiline(this SKBitmap bitmap, string[]? output=null)
     {
         try
         {
-            var outx = TovaFromBitmap(bitmap);
+            var outx = bitmap.TovaFromBitmapMultiLine();
             if (output != null && output.Length == 1)
             {
                 output[0] = outx;
             }
             return true;
         }
-        catch (Exception e)
+        catch 
         {
             return false;
         }
     }
-    public static string TovaFromBitmap(this SKBitmap bmp) 
+    private static bool TovaIsValidSingleLine (this SKBitmap bitmap, string[]? output=null)
+    {
+        try
+        {
+            var outx = TovaFromBitmapSingleLine(bitmap);
+            if (output != null && output.Length == 1)
+            {
+                output[0] = outx;
+            }
+            return true;
+        }
+        catch 
+        {
+            return false;
+        }
+    }
+
+    public static string TovaFromBitmap(this SKBitmap bmp)
+    {
+        string[] output = new string[1];
+        if (bmp.TovaIsValidSingleLine(output))
+        {
+            return output[0];
+        }
+        else if (bmp.TovaIsValidMultiline(output))
+        {
+            return output[0];
+        }
+        throw new ArgumentException();
+        
+    }
+
+    public static string TovaFromBitmapMultiLine(this SKBitmap bmp) => 
+            string.Join("\n",Enumerable.Range(0,bmp.Height)
+            .SelectMany(y => Enumerable.Range(0,bmp.Width)
+            .Select(x => (X:x,Y:y)))
+            .Aggregate((Bitmaps:Enumerable.Empty<SKBitmap>(),BackColor:(SKColor?)null,ForeColor:(SKColor?)null,TopLeft:((int X,int Y)?)null,TopRight:((int X,int Y)?)null,BottomLeft:((int X,int Y)?)null,BottomRight:((int X,int Y)?)null),
+            (state,coordinate) => {
+                if (state.BackColor == null)
+                {
+                    return (Bitmaps: state.Bitmaps,
+                    BackColor: bmp.GetPixel(coordinate.X, coordinate.Y),
+                    ForeColor: state.ForeColor,
+                    TopLeft: state.TopLeft,
+                    TopRight: state.TopRight,
+                    BottomLeft: state.BottomLeft,
+                    BottomRight: state.BottomRight
+                    );
+                }
+                else
+                {
+                    if (coordinate.Y == 0 || coordinate.Y == bmp.Height-1 || coordinate.X == 0 || coordinate.X == bmp.Width-1)
+                    {
+                        if (bmp.GetPixel(coordinate.X,coordinate.Y) != state.BackColor)
+                        {
+                            throw new ArgumentException("Edges must be a uniform color.");
+                        }
+                        else
+                        {
+                            return state;
+                        }
+                    }
+                    else
+                    {
+                        if (state.ForeColor == null)
+                        {
+                            if (bmp.GetPixel(coordinate.X,coordinate.Y) != state.BackColor)
+                            {
+                                return (Bitmaps: state.Bitmaps,
+                                BackColor: state.BackColor,
+                                ForeColor: bmp.GetPixel(coordinate.X, coordinate.Y),
+                                TopLeft: coordinate,
+                                TopRight: state.TopRight,
+                                BottomLeft: state.BottomLeft,
+                                BottomRight: state.BottomRight);
+                            }
+                            else
+                            {
+                                return state;
+                            }
+                        }
+                        else
+                        {
+                            if (state.TopLeft == null)
+                            {
+                                if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.BackColor)
+                                {
+                                    return state;
+                                }
+                                else if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.ForeColor)
+                                {
+                                    return (Bitmaps: state.Bitmaps,
+                                    BackColor:state.BackColor,
+                                    ForeColor:state.ForeColor,
+                                    TopLeft: coordinate,
+                                    TopRight: state.TopRight,
+                                    BottomLeft: state.BottomLeft,
+                                    BottomRight: state.BottomRight);
+                                }
+                                else
+                                {
+                                    throw new Exception("Tova Bitmaps should only have two colors!");
+                                }    
+                            }
+                            else
+                            {
+                                if (state.TopRight == null)
+                                {
+                                    if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.BackColor)
+                                    {
+                                        return state;
+                                    }
+                                    else if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.ForeColor)
+                                    {
+                                        if (coordinate.Y == state.TopLeft.Value.Y)
+                                        {
+                                            return (Bitmaps: state.Bitmaps,
+                                            BackColor:state.BackColor,
+                                            ForeColor:state.ForeColor,
+                                            TopLeft:state.TopLeft,
+                                            TopRight:coordinate,
+                                            BottomLeft:state.BottomLeft,
+                                            BottomRight:state.BottomRight);
+                                        }
+                                        else
+                                        {
+                                            throw new Exception("There seems to be no right edge to this line segment. This will not do.");
+                                        }    
+                                    }
+                                    else
+                                    {
+                                        throw new Exception("Tova Bitmaps should only have two colors!");
+                                    }
+                                }
+                                else
+                                {
+                                    if (state.BottomLeft == null)
+                                    {
+                                        if (bmp.GetPixel(coordinate.X, coordinate.Y) == state.BackColor)
+                                        {
+                                            return state;
+                                        }
+                                        else if (bmp.GetPixel(coordinate.X, coordinate.Y) == state.ForeColor)
+                                        {
+                                            if (coordinate.Y == state.TopRight.Value.Y)
+                                            {
+                                                throw new Exception("This line segment already has a right edge!");
+                                            }
+                                            else if (coordinate.Y > state.TopRight.Value.Y)
+                                            {
+                                                if (coordinate.X < state.TopLeft.Value.X)
+                                                {
+                                                    throw new Exception("Subsequent Rows start outside the box!");
+                                                }
+                                                else if (coordinate.X == state.TopLeft.Value.X)
+                                                {
+                                                    return (Bitmaps: state.Bitmaps,
+                                                    BackColor: state.BackColor,
+                                                    ForeColor: state.ForeColor,
+                                                    TopLeft: state.TopLeft,
+                                                    TopRight: state.TopRight,
+                                                    BottomLeft: coordinate,
+                                                    state.BottomRight);
+                                                }
+                                                else if (coordinate.X >= state.TopRight.Value.X)
+                                                {
+                                                    throw new Exception("Subsequent Rows end outside the box!");
+                                                }
+                                                else
+                                                {
+                                                    return state;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                throw new Exception("Subsequent Rows are before the first? Is the bitmap enumerator setup correctly?");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            throw new Exception("Tova Bitmaps should only have two colors!");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (state.BottomRight == null)
+                                        { 
+                                            if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.BackColor)
+                                            {
+                                                return state;
+                                            }
+                                            else if (bmp.GetPixel(coordinate.X,coordinate.Y) == state.ForeColor)
+                                            {
+                                                if (coordinate.Y == state.BottomLeft.Value.Y)
+                                                {
+                                                    if (coordinate.X == state.TopRight.Value.X)
+                                                    {
+                                                        var rect = new SKRect(left: state.TopLeft.Value.X, top: state.TopLeft.Value.Y, right: state.TopRight.Value.X+1 , bottom: coordinate.Y+1 );
+                                                        var bitmap = new SKBitmap((int)rect.Width, (int)rect.Height);
+                                                        var canvas = new SKCanvas(bitmap);
+                                                        canvas.DrawBitmap(bmp,rect,new SKRect(0,0, bitmap.Width, bitmap.Height));
+                                                        canvas.Flush();                                                        
+                                                        return (Bitmaps: state.Bitmaps.Append(bitmap),
+                                                        BackColor: state.BackColor,
+                                                        ForeColor: state.ForeColor,
+                                                        TopLeft: null,
+                                                        TopRight: null,
+                                                        BottomLeft: null,
+                                                        BottomRight: null);
+                                                    }
+                                                    else
+                                                    {
+                                                        throw new Exception("Square is not even.");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    throw new Exception("Square is not even.");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            throw new Exception("State should have reset the corners and added a bitmap by now!");
+                                        }
+                                    }
+                                }
+                            }
+                        }    
+                    }
+                }    
+                return state;
+        },(fin) => fin.Bitmaps)
+            .Select(bmp => bmp.TovaFromBitmapSingleLine()));
+    
+    public static string TovaFromBitmapSingleLine(this SKBitmap bmp) 
     {
         var oncolor = bmp.GetPixel(0,0);
         var offcolor = bmp.GetPixel(0,1);
@@ -91,12 +333,12 @@ internal static class TovaExtensions
         
 
     }
-    public static T SleepAndPass<T>(this T element,int millis)
+    private static T SleepAndPass<T>(this T element,int millis)
     {
         Task.Delay(millis).Wait();
         return element;
     }
-    public static string ConvertIntoString(this IEnumerable<string[]> penRowSequences) => penRowSequences
+    private static string ConvertIntoString(this IEnumerable<string[]> penRowSequences) => penRowSequences
     .Select(s => Pencodes.PenCodeForPenRows(s))
     .Aggregate((Text:"",Inited:false,Finished:false),(prev,cur) => {
         if (!prev.Inited)
@@ -128,7 +370,7 @@ internal static class TovaExtensions
     },(fin) => {
         return fin.Text;
     });
-    public static IEnumerable<string[]> ConvertIntoPenRowSequences(this IEnumerable<SKBitmap> bitmaps) => bitmaps    
+    private static IEnumerable<string[]> ConvertIntoPenRowSequences(this IEnumerable<SKBitmap> bitmaps) => bitmaps    
     .Select(bmp => Enumerable.Range(0,bmp.Height)
     .Select(r => Enumerable.Range(0,bmp.Width)
     .Select(c => (X:c,Y:r)))
@@ -168,7 +410,7 @@ internal static class TovaExtensions
         int segsPerHeight = bitmap.Height / segHeight;
         return segsPerHeight == 1;
     }
-    public static IEnumerable<SKBitmap> SplitIntoSegments(this SKBitmap bitmap)
+    private static IEnumerable<SKBitmap> SplitIntoSegments(this SKBitmap bitmap)
     {
         int segWidth = Pencodes.PenCodes.First().PenRowBmpTrimmed.Width;
         int segHeight = Pencodes.PenCodes.First().PenRowBmpTrimmed.Height;
@@ -188,7 +430,7 @@ internal static class TovaExtensions
             return seg;
         }))()).AsEnumerable();
     }
-    public static SKBitmap UnfinishBitmap(this SKBitmap bitmap)
+    private static SKBitmap UnfinishBitmap(this SKBitmap bitmap)
     {
         var unfinishedBmp = new SKBitmap(bitmap.Width-2,bitmap.Height-2);
         var canvas = new SKCanvas(unfinishedBmp);
@@ -196,20 +438,7 @@ internal static class TovaExtensions
         canvas.Flush();
         return unfinishedBmp;
     }
-    public static string TovaString(this string str,bool singleLine=false) {
-        var bmp = str.TovaBitmap(singleLine).UnfinishBitmap();
-        
-        return Enumerable.Range(0,bmp.Height)
-            .SelectMany(s => Enumerable.Range(0,bmp.Width)
-            .Select(s2 => (X:s2,Y:s)))
-            .Select(s => (X:s.X,Y:s.Y,Color:bmp.GetPixel(s.X,s.Y)))
-            .Select(s => (X:s.X,Y:s.Y,Ch:s.Color == SKColors.White ? '#' : ' '))
-            .GroupBy(s => s.Y)
-            .Select(s => s.OrderBy(s2 => s2.X).Select(s2 => s2.Ch))
-            .Select(s => s.CoalesceEnumerableToString())
-            .CoalesceEnumerableToLinedString();
-        
-    }
+    
     
     
     
@@ -240,7 +469,7 @@ internal static class TovaExtensions
     .Where(pc => pc.IsSpecial)
     .Where(pc => pc.IsReverseStart));
     private static IEnumerable<SKBitmap> ConvertToGraphics(this IEnumerable<PenCode> penCodes,SKColor? onColor,SKColor? offColor,string? hexColorOn,string? hexColorOff) =>
-        penCodes
+        penCodes        
         .Select(pc => pc.PenRowBmpTrimmed)
         ;
     
@@ -444,7 +673,7 @@ internal static class TovaExtensions
     private static SKBitmap AssembleBitmap(this IEnumerable<SKBitmap> bitmaps,bool singleLine) => singleLine ? 
     bitmaps.AssembleSingleLineBitmap() : 
     bitmaps.AssembleSquareBitmap();
-    private static SKBitmap FinishBitmap(this SKBitmap bitmap) 
+    private static SKBitmap FinishBitmap(this SKBitmap bitmap,bool bright=true) 
     {
         var output = new SKBitmap(bitmap.Width+2,bitmap.Height+2);
         var canvas = new SKCanvas(output);
@@ -455,10 +684,10 @@ internal static class TovaExtensions
         canvas.DrawRect(new SKRect(0,0,output.Width,output.Height),paint);
         canvas.DrawBitmap(bitmap,new SKPoint(1,1));        
         canvas.Flush();
-        output.SetPixel(0,0,SKColors.White);
-        output.SetPixel(output.Width-1,0,SKColors.White);
-        output.SetPixel(0,output.Height-1,SKColors.White);
-        output.SetPixel(output.Width-1,output.Height-1,SKColors.White);
+        output.SetPixel(0,0,bright ? SKColors.White : SKColors.Black);
+        output.SetPixel(output.Width-1,0, bright ? SKColors.White : SKColors.Black);
+        output.SetPixel(0,output.Height-1, bright ? SKColors.White : SKColors.Black);
+        output.SetPixel(output.Width-1,output.Height-1, bright ? SKColors.White : SKColors.Black);
         return output;
     }
 

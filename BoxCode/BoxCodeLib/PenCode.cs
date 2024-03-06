@@ -168,6 +168,17 @@ internal class PenCode
         return bmp;
         }
     }
+    public SKBitmap PenRowBmpTrimmedReverse => 
+        Enumerable.Repeat(PenRowBmpTrimmed, 1)
+                .Select(bmp => Enumerable.Range(0, bmp.Height)
+                .SelectMany(y => Enumerable.Range(0, bmp.Width)
+                .Select(x => (X: x, Y: y)))
+                .Aggregate(new SKBitmap(bmp.Width, bmp.Height), (state, current) =>
+                {
+                    state.SetPixel(state.Width - 1-current.X, current.Y, bmp.GetPixel(current.X, current.Y));
+                    return state;
+                })).Single();
+
     public SKBitmap PenRowsBmp {
         get
         {

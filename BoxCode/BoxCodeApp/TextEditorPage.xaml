@@ -20,7 +20,8 @@ Grid.Column="0"
 Grid.ColumnSpan="2">
             <Editor
                 AutoSize="TextChanges"
-                x:Name="BoxCodeText"/>
+                x:Name="BoxCodeText"
+                TextChanged="BoxCodeText_TextChanged_1"/>
         </ScrollView>
         <ActivityIndicator
             Scale="3"
@@ -53,10 +54,10 @@ Grid.ColumnSpan="2">
                 Grid.Column="0"
                 >
             <Label HorizontalOptions="StartAndExpand"
-                   Text="Single Line"
+                   Text="Squared Word"
                    HorizontalTextAlignment="Center"/>
             <CheckBox HorizontalOptions="Start"
-                      x:Name="SingleLine"/>
+                      x:Name="SquaredWord"/>
 
         </HorizontalStackLayout>
         

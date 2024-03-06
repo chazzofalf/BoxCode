@@ -5,10 +5,12 @@ namespace BoxCodeApp;
 public partial class MainPage : ContentPage
 {
 	int count = 0;
-    private byte[] data;
-    private Stream GetDataStream()
+    private byte[]? data;
+    private Stream? GetDataStream()
     {
-        return new MemoryStream(data);
+        if (data != null)
+            return new MemoryStream(data);
+        return null;
     }
 	public MainPage()
 	{
@@ -34,7 +36,7 @@ public partial class MainPage : ContentPage
             
             data = app.LoadedImage.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100).ToArray();
             var source = ImageSource.FromStream(GetDataStream);
-            App.Current.Dispatcher.Dispatch(() =>
+            app.Dispatcher.Dispatch(() =>
             {
                 LoadedImage.Source = source;
                 Busy.IsRunning = Busy.IsVisible = false;
@@ -62,7 +64,9 @@ public partial class MainPage : ContentPage
         {
             Task.Run(async () =>
             {
+#pragma warning disable CA1416 // Validate platform compatibility
                 var fsr = await global::CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync("message.png", app.LoadedImage.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100).AsStream());
+#pragma warning restore CA1416 // Validate platform compatibility
                 if (fsr.IsSuccessful)
                 {
 
@@ -103,7 +107,7 @@ public partial class MainPage : ContentPage
                         }
                         
                     }
-                    catch (Exception ex)
+                    catch 
                     {
                         await CommunityToolkit.Maui.Alerts.Toast.Make("This was an invalid image.").Show();
                         
@@ -125,7 +129,11 @@ public partial class MainPage : ContentPage
     }
     private void ResetThreadSafe()
     {
-        App.Current.Dispatcher.Dispatch(Reset);
+        if (App.Current is App app)
+        {
+            app.Dispatcher.Dispatch(Reset);
+        }
+        
     }
     private void ClearImage_Clicked(object sender, EventArgs e)
     {

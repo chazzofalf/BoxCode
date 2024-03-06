@@ -1,6 +1,7 @@
 
 
 using SkiaSharp;
+using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BoxCodeApp;
@@ -23,12 +24,12 @@ public partial class TextEditorPage : ContentPage
         if (app != null)
         {
             var text = BoxCodeLib.LibraryUtil.ConvertFromBitmap(app.LoadedImage);
-            var isSingleLine = BoxCodeLib.LibraryUtil.IsSingleLine(app.LoadedImage);
-            App.Current.Dispatcher.Dispatch(() =>
+            
+            app.Dispatcher.Dispatch(() =>
             {
                 BoxCodeText.Text = text;
                 Busy.IsRunning = Busy.IsVisible = false;
-                SingleLine.IsChecked = isSingleLine;
+                
             });
         }
     }
@@ -38,8 +39,8 @@ public partial class TextEditorPage : ContentPage
         var app = (App.Current as App);
         if (app != null)
         {
-            app.LoadedImage = BoxCodeLib.LibraryUtil.ConvertToBitmap(BoxCodeText.Text,singleLine:SingleLine.IsChecked);
-            App.Current.Dispatcher.Dispatch(() =>
+            app.LoadedImage = BoxCodeLib.LibraryUtil.ConvertToBitmap(BoxCodeText.Text,singleLine:!SquaredWord.IsChecked);
+            app.Dispatcher.Dispatch(() =>
             {
                 Navigation.PopAsync();
             });
@@ -58,7 +59,9 @@ public partial class TextEditorPage : ContentPage
             var text = BoxCodeText.Text;
             var data = System.Text.Encoding.UTF8.GetBytes(text);
             var stream = new MemoryStream(data);
+#pragma warning disable CA1416 // Validate platform compatibility
             var fsr = await global::CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync("message.text", stream);
+#pragma warning restore CA1416 // Validate platform compatibility
             if (fsr.IsSuccessful)
             {
 
@@ -96,5 +99,23 @@ public partial class TextEditorPage : ContentPage
     private void Cancel_Clicked(object sender, EventArgs e)
     {
         Navigation.PopAsync();
+    }
+
+    private void BoxCodeText_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        
+    }
+
+    private void BoxCodeText_TextChanged_1(object sender, TextChangedEventArgs e)
+    {
+        if (Regex.Split(e.NewTextValue, "\r\n|\r|\n").Length > 1)
+        {
+            SquaredWord.IsChecked = false;
+            SquaredWord.IsEnabled = false;
+        }
+        else
+        {
+            SquaredWord.IsEnabled = true;
+        }
     }
 }
