@@ -10,6 +10,8 @@ internal static class Pencodes
     private static PenCode[]? _sideSpacedPenCodes = null;
     private static PenCode[]? _centerSlattedPenCodes = null;
 
+    public static PenCode GetReversedPencode(this PenCode pc) => pc is PenCodeReversed ? new PenCode(pc) : new PenCodeReversed(pc);
+
     private static PenCode[]? _squaredPenCodes = null;
 
     public static PenCode[] SquaredPenCodes => _squaredPenCodes ??= GetSquaredPenCodes();
@@ -44,10 +46,10 @@ internal static class Pencodes
 
     public static PenCode PenCodeForPenRows(this string[] penrows)
     {
-        var x = Pencodes.PenCodes.Select(pc => (PenCode:pc,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
+        var x = Pencodes.AllPenCodes.Select(pc => (PenCode:pc,PenRowPairs:pc.PenRows.Zip(penrows,(a,b) => (PenRowA:a,PenRowB:b))));
         var y = x.Select(s => (PenCode:s.PenCode,MatchTests:s.PenRowPairs.Select(s2 => s2.PenRowA == s2.PenRowB)));
         var z = y.Select(s => (PenCode:s.PenCode,Match:!s.MatchTests.Where(s2 => !s2).Any()));
-        var a = z.Where(s => s.Match).Select(s => s.PenCode).Single();
+        var a = z.Where(s => s.Match).Select(s => s.PenCode).First();
         return a;
     }
     public static char LetterForPenRows(this string[] penrows) =>
@@ -66,6 +68,14 @@ internal static class Pencodes
     
 
     public static PenCode[] PenCodes => _pencodes ??= GetPenCodes();
+
+    public static PenCode[] ReversedPenCodes => PenCodes
+        .Select(s => s.GetReversedPencode())
+        .ToArray();
+
+    public static PenCode[] AllPenCodes => PenCodes
+        .Concat(ReversedPenCodes)
+        .ToArray();
 
     public static PenCode[] LetteredPenCodes => PenCodes
     .Where(pc => !pc.IsSpecial)

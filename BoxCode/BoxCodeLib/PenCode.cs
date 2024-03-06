@@ -2,17 +2,42 @@
 
 namespace BoxCodeLib;
 
+internal class PenCodeReversed : PenCode
+{
+    internal PenCodeReversed(PenCode pc) : base(pc)
+    {
+    }
+
+    
+
+    public override bool IsReversed => true;
+    public override string[] PenRows => base.PenRows
+        .Select(x => x.Reverse()
+        .CoalesceEnumerableToString())
+        .ToArray();
+
+}
 internal class PenCode
 {
     public string Letter {get;  }
-    public string[] PenRows {get;  }
+    public virtual string[] PenRows {get;  }
 
     public bool IsSpecial {get; }
     public bool IsStart {get; }
     public bool IsReverseStart {get; }
     public bool IsEnd {get; }
     public bool IsUsed {get; }
-
+    public virtual bool IsReversed => false;
+    internal PenCode(PenCode pc)
+    {
+        Letter = pc.Letter;
+        PenRows = pc.PenRows;
+        IsSpecial = pc.IsSpecial;
+        IsStart = pc.IsStart;
+        IsReverseStart = pc.IsReverseStart;
+        IsUsed = pc.IsUsed;
+        IsEnd = pc.IsEnd;
+    }
     internal PenCode(RawPenCode rpc) {
         if (rpc.Letter != null && rpc.PenRows != null
         && rpc.IsSpecial != null
@@ -152,7 +177,7 @@ internal class PenCode
         }
     }
     public string PenRowsStr => string.Join("\n",PenRows);
-    public SKBitmap PenRowBmpTrimmed 
+    public virtual SKBitmap PenRowBmpTrimmed 
     {
         get
         {
@@ -179,7 +204,7 @@ internal class PenCode
                     return state;
                 })).Single();
 
-    public SKBitmap PenRowsBmp {
+    public  SKBitmap PenRowsBmp {
         get
         {
             var lines = PenRows.Length;

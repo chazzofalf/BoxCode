@@ -464,7 +464,8 @@ internal static class TovaExtensions
     .Concat(Pencodes.PenCodes
     .Where(pc => pc.IsSpecial)
     .Where(pc => pc.IsEnd))
-    .Concat(penCodes.Reverse())
+    .Concat(penCodes.Reverse()
+        .Select(pc => pc.GetReversedPencode()))
     .Concat(Pencodes.PenCodes
     .Where(pc => pc.IsSpecial)
     .Where(pc => pc.IsReverseStart));

@@ -20,10 +20,21 @@ public partial class TextEditorPage : ContentPage
     public async Task RetrieveText()
     {
         await Task.Yield();
+        
         var app = (App.Current as App);
         if (app != null)
         {
-            var text = BoxCodeLib.LibraryUtil.ConvertFromBitmap(app.LoadedImage);
+
+            var text = "";
+            try
+            {
+                text = BoxCodeLib.LibraryUtil.ConvertFromBitmap(app.LoadedImage);
+            }
+            catch
+            {
+
+            }
+                
             
             app.Dispatcher.Dispatch(() =>
             {
