@@ -4,7 +4,7 @@ namespace BoxCodeApp;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	// int count = 0;
     private byte[]? data;
     private Stream? GetDataStream()
     {
@@ -38,7 +38,7 @@ public partial class MainPage : ContentPage
             var source = ImageSource.FromStream(GetDataStream);
             app.Dispatcher.Dispatch(() =>
             {
-                LoadedImage.Source = source;
+                // LoadedImage.Source = source;
                 Busy.IsRunning = Busy.IsVisible = false;
             });
             
@@ -80,6 +80,7 @@ public partial class MainPage : ContentPage
 
     private void LoadImage_Clicked(object sender, EventArgs e)
     {
+        
         var app = (App.Current as App);
         if (app != null)
         {

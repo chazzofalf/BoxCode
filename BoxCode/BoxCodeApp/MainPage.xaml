@@ -15,15 +15,13 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+        <Frame
+            x:Name="LoadedImageHolder"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            />
         
-        <Image
-                Source="messagersrc.png"
-                x:Name="LoadedImage"
-                Aspect="AspectFit"
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                SemanticProperties.Description="Box Code Display" />
         <ActivityIndicator IsVisible="true"
                            IsRunning="True"
                            Scale="3"
