@@ -20,6 +20,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
+            Padding="0"
             />
         
         <ActivityIndicator IsVisible="true"

@@ -15,8 +15,12 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-        
-	}
+#if WINDOWS
+        LoadedImageHolder.Content = new BoxCodeApp.ImageView();
+#else
+        LoadedImageHolder.Content = new BoxCodeApp.GraphicsView();
+#endif
+    }
     private void Refresh()
     {
         Busy.IsRunning = Busy.IsVisible = true;
@@ -34,10 +38,12 @@ public partial class MainPage : ContentPage
         if (app != null)
         {
             
-            data = app.LoadedImage.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100).ToArray();
-            var source = ImageSource.FromStream(GetDataStream);
+            
             app.Dispatcher.Dispatch(() =>
             {
+#if WINDOWS
+                (LoadedImageHolder.Content as ImageView)?.Refresh();
+#endif
                 // LoadedImage.Source = source;
                 Busy.IsRunning = Busy.IsVisible = false;
             });
